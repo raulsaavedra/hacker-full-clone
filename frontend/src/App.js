@@ -17,9 +17,10 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('https://hn.algolia.com/api/v1/search_by_date?query=nodejs');
+    const response = await fetch('http://localhost:4000/posts');
     const data = await response.json()
-    this.setState({ posts: data.hits })
+    console.log(data);
+    this.setState({ posts: data})
     console.log(this.state.posts)
   }
 
