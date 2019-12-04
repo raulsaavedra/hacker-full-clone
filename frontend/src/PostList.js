@@ -6,32 +6,28 @@ const PostList = ({posts}) => {
       {posts.map((post, i) => {
         if ((post.story_title || post.title !== null)) {
           const currentDate = new Date()
-          const date = new Date(post.created_at)
-          const monthName = [
-           "January",
-           "February",
-           "March",
-           "April",
-           "May",
-           "June",
-           "July",
-           "August",
-           "September",
-           "October",
-            "November",
-            "December",
-          ]
-          const month = monthName[date.getMonth()]
-          const day = date.getDate();
-          const hour = date.getHours();
-          const minute = date.getMinutes()
+          const postDate = new Date(post.created_at)
+          const renderDate = (date) => {
+            const today = new Date
+            const yesterday = new Date; yesterday.setDate(today.getDate() - 1)
+            if(date.toLocaleDateString() == today.toLocaleDateString()) {
+              const todayDate = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+              return todayDate
+            } else if (date.toLocaleDateString() == yesterday.toLocaleDateString()) {
+              return 'Yesterday'
+            }
+            return date.toLocaleDateString('en-US', {
+              day : 'numeric',
+              month : 'long'
+            })
+          }
+
         return <Post 
         key={i} 
         title={post.story_title ? post.story_title : post.title} 
         author={post.author} 
         date={`
-        ${date === currentDate - 1 ? 'yesterday' : month + ' ' + day } 
-        ${hour >= 10 ? hour : '0' + hour}:${minute >= 10 ? minute : '0' + minute}
+        ${renderDate(postDate)}
         `}
         url={
           post.url ? post.url : post.story_url

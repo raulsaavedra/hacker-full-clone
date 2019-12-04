@@ -13,13 +13,15 @@ const StyledDate = styled.p.attrs({
   margin-left: auto;
 `
 const PostPreview = ({ title, author, date, url}) => (
-  <StyledArticle>
-    <a href={`${url}`}>
-      <h3 className="f4 black pt0 dib pr3">{title}</h3>
-      <p className="f5 gray dib pt1 pr2">{`-${author}-`}</p>
-      <StyledDate className="f5 black dib pt1">{date}</StyledDate>
-    </a>
-  </StyledArticle>
+  <a className="no-underline" href={`${url}`}>
+    <StyledArticle>
+      
+        <h3 className="f4 black pt0 dib pr3">{title}</h3>
+        <p className="f5 gray dib pt1 pr2">{`-${author}-`}</p>
+        <StyledDate className="f5 black dib pt1 pr4 fw8">{date}</StyledDate>
+      
+    </StyledArticle>
+  </a>
 );
 
 export default PostPreview;
