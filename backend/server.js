@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const fetch = require('node-fetch');
 
+const CLIENT_BUILD_PATH = path.join(__dirname, '../frontend/build');
+
 const connect = url =>
   mongoose.connect(url, {
     useNewUrlParser: true,
@@ -20,13 +22,16 @@ const postSchema = new mongoose.Schema({
 });
 
 const Post = mongoose.model('Post', postSchema);
-const CLIENT_BUILD_PATH = path.join(__dirname, '../frontend/build');
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(CLIENT_BUILD_PATH));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
+});
 
 app.get('/create', async (req, res) => {
   const response = await fetch(
@@ -44,6 +49,7 @@ app.get('/create', async (req, res) => {
       story_url: post.story_url,
     })
   );
+  res.status(201).json('success!');
 });
 
 app.get('/posts', async (req, res) => {
@@ -52,10 +58,10 @@ app.get('/posts', async (req, res) => {
   res.status(201).json(allPosts);
 });
 
-connect('mongodb://localhost:27017/intro')
+connect('mongodb://localhost:27017/posts')
   .then(() =>
-    app.listen(4000, () => {
-      console.log('server on http://localhost:4000');
+    app.listen(9000, () => {
+      console.log('server on http://localhost:9000');
     })
   )
   .catch(e => console.error(e));

@@ -5,7 +5,7 @@ services:
     web:
         build: .
         ports:
-          - "80:8000"
+          - "90:9000"
         restart: always
         links:
           - mongo
@@ -13,7 +13,5 @@ services:
     mongo:
         image: mongo
         restart: always
-        env_file:
-          - ./backend/.env 
         ports:
-          - "5432:5432"
+          - "27017:27017"
