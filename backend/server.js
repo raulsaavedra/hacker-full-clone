@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 const fetch = require('node-fetch');
+const schedule = require('node-schedule');
 
 const CLIENT_BUILD_PATH = path.join(__dirname, '../frontend/build');
 
@@ -29,10 +30,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(CLIENT_BUILD_PATH));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
-});
-
+// schedule.scheduleJob('*/1 * * * *', async () => {
 app.get('/create', async (req, res) => {
   const response = await fetch(
     'https://hn.algolia.com/api/v1/search_by_date?query=nodejs'
@@ -49,7 +47,10 @@ app.get('/create', async (req, res) => {
       story_url: post.story_url,
     })
   );
-  res.status(201).json('success!');
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
 });
 
 app.get('/posts', async (req, res) => {
