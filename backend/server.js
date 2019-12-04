@@ -58,6 +58,12 @@ app.get('/posts', async (req, res) => {
   res.status(201).json(allPosts);
 });
 
+app.post('/delete', async (req, res) => {
+  await Post.findByIdAndDelete(req.body.id);
+  console.log(req.body.id);
+  res.status(201).json('success');
+});
+
 connect('mongodb://localhost:27017/posts')
   .then(() =>
     app.listen(9000, () => {

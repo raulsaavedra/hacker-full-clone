@@ -23,6 +23,7 @@ const PostList = ({posts}) => {
           }
 
         return <Post 
+        id={post._id}
         key={i} 
         title={post.story_title ? post.story_title : post.title} 
         author={post.author} 
