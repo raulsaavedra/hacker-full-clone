@@ -4,7 +4,7 @@ const PostList = ({posts}) => {
   return (
     <div>
       {posts.map((post, i) => {
-        if ((post.story_title || post.title !== null) && (post.url || post.story_url !== null)) {
+        if ((post.story_title || post.title !== null)) {
           const currentDate = new Date()
           const date = new Date(post.created_at)
           const monthName = [
@@ -27,7 +27,7 @@ const PostList = ({posts}) => {
           const minute = date.getMinutes()
         return <Post 
         key={i} 
-        title={post.story_title ? post.story_title : post.title ? post.title : null} 
+        title={post.story_title ? post.story_title : post.title} 
         author={post.author} 
         date={`
         ${date === currentDate - 1 ? 'yesterday' : month + ' ' + day } 
