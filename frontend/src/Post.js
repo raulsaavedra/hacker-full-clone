@@ -16,18 +16,26 @@ const StyledDate = styled.p.attrs({
  
 `
 class PostPreview extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      showPost: true
+    }
+  }
 
   deletePost = async () => {
-    const response = await fetch('http://localhost:9000/delete', {
+    const response = await fetch('http://localhost:90/delete', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         id: this.props.id
       })
     });
+    this.setState({showPost: false})
   }
   render () {
-    const {url, title, author, date} = this.props;
+    const {url, title, author, date } = this.props;
+    if (this.state.showPost) {
     return (
       <StyledArticle>
         <a className="no-underline" href={`${url}`}>
@@ -42,6 +50,8 @@ class PostPreview extends React.Component {
       </StyledArticle>
 
     )
+    }
+    else { return null}
   }
 }
 

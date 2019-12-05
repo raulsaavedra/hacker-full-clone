@@ -11,6 +11,7 @@ const CLIENT_BUILD_PATH = path.join(__dirname, '../frontend/build');
 const connect = url =>
   mongoose.connect(url, {
     useNewUrlParser: true,
+    connectTimeoutMS: 1000,
   });
 
 const postSchema = new mongoose.Schema({
@@ -62,7 +63,7 @@ app.get('/create', async (req, res) => {
   );
   const data = await response.json();
   const posts = data.hits;
-  posts.map(async post =>
+  const createPosts = await posts.map(async post =>
     Post.create({
       title: post.title,
       story_title: post.story_title,
@@ -72,6 +73,11 @@ app.get('/create', async (req, res) => {
       story_url: post.story_url,
     })
   );
+  if (createPosts.length) {
+    res.status(201).json(createPosts);
+  } else {
+    res.status(400);
+  }
 });
 
 app.get('/', (req, res) => {
@@ -81,7 +87,11 @@ app.get('/', (req, res) => {
 app.get('/posts', async (req, res) => {
   const allPosts = await Post.find({});
   console.log(allPosts);
-  res.status(201).json(allPosts);
+  if (allPosts.length) {
+    res.status(201).json(allPosts);
+  } else {
+    res.status(400);
+  }
 });
 
 app.post('/delete', async (req, res) => {
@@ -90,10 +100,12 @@ app.post('/delete', async (req, res) => {
   res.status(201).json('success');
 });
 
-connect('mongodb://localhost:27017/posts')
+connect('mongodb://mongo:27017/posts')
   .then(() =>
     app.listen(9000, () => {
       console.log('server on http://localhost:9000');
     })
   )
-  .catch(e => console.error(e));
+  .catch(e => {
+    console.log(e);
+  });

@@ -8,10 +8,13 @@
     "backend": "nodemon server.js",
     "frontend": "npm run start --prefix ../frontend",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha Test.js"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -22,7 +25,8 @@
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.13",
     "node-fetch": "^2.6.0",
-    "node-schedule": "^1.3.2"
+    "node-schedule": "^1.3.2",
+    "request": "^2.88.0"
   },
   "keywords": [],
   "author": "",
