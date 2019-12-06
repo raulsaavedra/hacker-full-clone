@@ -17,7 +17,8 @@ are running the project.
 - To force a data refresh, go to /create and go back to the home page.
 - Feel free to delete posts and refresh to check if they were deleted.
 - I used node-scheduler to run a function every hour that adds to the database
-the latest posts from that hour. You can check if it is working on here:
+the latest posts from that hour. You can check if it is working on my dockerized
+app running on the cloud here:
 http://64.225.46.95:90/
 
 
