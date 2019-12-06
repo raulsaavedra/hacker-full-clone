@@ -1,12 +1,18 @@
 # Welcome to my app.
 
+
+## Demo http://64.225.46.95:90/
 This is a clone of HackerNews fetching the latest Node.js news.
 
 React.js + Material UI + Styled-Components and Tachyons was used to build the 
 frontend
 
-Node.js + MongoDB was used for the backend while Mocha, Chai, and Supertest 
-were used for the tests.
+Node.js + Express + MongoDB was used for the backend while Mocha, Chai, and 
+Supertest were used for the tests.
+
+The entire app is Dockerized and has React, Node.js and 
+MongoDB running. Node.js serves the static production build from React.
+The dockerized project can start with a simple docker-compose --up build.
 
 # Instructions
 
