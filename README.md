@@ -21,5 +21,5 @@ the latest posts from that hour. You can check if it is working on here:
 http://64.225.46.95:90/
 
 
-Extras:
--Docker uses a multi-stage build.
+# Extras:
+- Docker uses a multi-stage build.
