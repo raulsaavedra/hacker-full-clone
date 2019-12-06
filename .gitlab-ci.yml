@@ -1,0 +1,12 @@
+image: tmaier/docker-compose:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+
+build and test: 
+  stage: build
+  script: docker-compose build
