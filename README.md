@@ -29,4 +29,4 @@ http://64.225.46.95:90/
 
 
 # Extras:
-- Docker uses a multi-stage build.
+- The client is compiled in a multi-stage build for production.
