@@ -24,7 +24,7 @@ class PostPreview extends React.Component {
   }
 
   deletePost = async () => {
-    const response = await fetch('http://localhost:90/delete', {
+    const response = await fetch('delete', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

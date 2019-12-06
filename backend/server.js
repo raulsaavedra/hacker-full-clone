@@ -31,7 +31,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(CLIENT_BUILD_PATH));
 
-schedule.scheduleJob('*/60 * * * *', async () => {
+schedule.scheduleJob('0 * * * *', async () => {
   const response = await fetch(
     'https://hn.algolia.com/api/v1/search_by_date?query=nodejs'
   );
@@ -85,7 +85,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/posts', async (req, res) => {
-  const allPosts = await Post.find({});
+  const allPosts = await Post.find({}).sort({created_at: 'desc'});
   console.log(allPosts);
   if (allPosts.length) {
     res.status(201).json(allPosts);
