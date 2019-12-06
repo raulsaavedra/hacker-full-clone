@@ -5,8 +5,7 @@ services:
 
 stages:
   - build
-  - test
 
 build and test: 
   stage: build
-  script: docker-compose build && docker-compose up -d && docker-compose exec web sh -c "npm run test"
+  script: docker-compose build && docker-compose up -d
