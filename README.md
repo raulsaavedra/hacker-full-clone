@@ -19,3 +19,7 @@ are running the project.
 - I used node-scheduler to run a function every hour that adds to the database
 the latest posts from that hour. You can check if it is working on here:
 http://64.225.46.95:90/
+
+
+Extras:
+-Docker uses a multi-stage build.
